@@ -30,6 +30,9 @@
                             </span>
                             {{ $foto->likeFotos()->count() }} Like
                         </button>
+                        <a href="{{ route('foto.download', $foto->id) }}" class="btn btn-primary">
+                            <span class="material-symbols-outlined">download</span></span> Download Foto
+                        </a>
                     </form>
                 </div>
             </div>

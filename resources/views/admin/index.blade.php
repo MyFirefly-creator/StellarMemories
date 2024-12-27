@@ -10,6 +10,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Nama Lengkap</th>
@@ -19,6 +20,7 @@
             <tbody>
                 @foreach($users as $user)
                 <tr>
+                    <td>{{ $user->id }}</td>
                     <td>{{ $user->Username }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->NamaLengkap }}</td>
@@ -36,7 +38,6 @@
         </table>
     </div>
 
-    <!-- Postingan Warning Section -->
     <div class="view-warnings mt-5">
         <h2 class="section-title">Postingan Warning</h2>
         <table class="table">

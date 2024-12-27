@@ -56,3 +56,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::post('/warning', [WarningController::class, 'store'])->name('warning.store');
+
+Route::get('/foto/download/{id}', [FotoController::class, 'download'])->name('foto.download');

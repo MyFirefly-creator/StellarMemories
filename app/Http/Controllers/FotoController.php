@@ -150,4 +150,15 @@ public function destroy($id)
 
         return view('foto.show', compact('foto'));
     }
+
+    public function download($id)
+    {
+        $foto = Foto::findOrFail($id);
+        $filePath = public_path('photo/' . $foto->foto);
+        if (!file_exists($filePath)) {
+            abort(404, 'File tidak ditemukan.');
+        }
+
+        return response()->download($filePath, $foto->JudulFoto . '.' . pathinfo($filePath, PATHINFO_EXTENSION));
+    }
 }
