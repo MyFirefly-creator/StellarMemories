@@ -22,6 +22,9 @@ class User extends Authenticatable
         'Alamat',
         'image',
         'role',
+        'google_id',
+        'google_token',
+        'google_refresh_token',
     ];
 
     protected $hidden = [

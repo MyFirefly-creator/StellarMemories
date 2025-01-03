@@ -48,6 +48,8 @@ class UserController extends Controller
             'Alamat' => $validated['Alamat'],
             'image' => $image_nama,
             'role' => 'user',
+            'google_id' => null,
+            'google_token' => null,
         ]);
 
         return redirect()->route('sesi.index')->with('success', 'Berhasil Registrasi.');

@@ -41,6 +41,10 @@
 
                         <p class="mt-3 text-center">Belum punya akun? <a href="{{ route('sesi.register') }}">Daftar di sini</a></p>
                     </div>
+
+                    <div>
+                        <a href="auth/redirect">Login With Google</a>
+                    </div>
                 </div>
             </div>
         </div>

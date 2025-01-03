@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -58,3 +59,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::post('/warning', [WarningController::class, 'store'])->name('warning.store');
 
 Route::get('/foto/download/{id}', [FotoController::class, 'download'])->name('foto.download');
+
+
+Route::get('sesi/auth/redirect', [SocialiteController::class, 'redirect']);
+
+Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);
