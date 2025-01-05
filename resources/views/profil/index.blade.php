@@ -97,7 +97,6 @@
         background-color: #f8f9fa;
     }
 
-    /* Adjusting layout for small screens */
     @media (max-width: 768px) {
         .col-md-4 {
             width: 100%;

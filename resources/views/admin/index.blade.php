@@ -4,7 +4,6 @@
 <div class="container">
     <h1 class="page-title text-center">Admin Panel</h1>
 
-    <!-- Kelola User Section -->
     <div class="user-management mt-4">
         <h2 class="section-title">Kelola User</h2>
         <table class="table">
@@ -54,7 +53,7 @@
                 @foreach($warnings as $warning)
                     <tr>
                         @php
-                            $foto = $warning->foto; // Ambil relasi Foto dari Warning
+                            $foto = $warning->foto; 
                         @endphp
                         <td>
                             @if($foto && $foto->foto)

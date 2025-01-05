@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stellar Memories</title>
+  <link rel="icon" type="image/x-icon" href="{{ url('img/Logo.jpg') }}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .carousel-inner {
@@ -30,14 +31,46 @@
       text-align: center;
     }
 
+    .navbar {
+      background-color: #1b1b32;
+    }
+
+    .navbar-brand {
+      color: white; 
+    }
+
     .navbar-brand img {
       width: 40px;
       height: auto;
     }
+
+    .navbar .navbar-nav .nav-item .btn {
+      color: white;
+    }
+
+    .navbar .navbar-nav .nav-item .btn-danger {
+      background-color: #d9534f;
+      border: none;
+    }
+
+    .navbar .navbar-nav .nav-item .btn-light {
+      background-color: #ffffff;
+      color: #1b1b32;
+      border: none;
+    }
+
+    .navbar .navbar-nav .nav-item .btn-light:hover {
+      background-color: #f8f9fa;
+    }
+
+    footer {
+      background-color: #1b1b32;
+      color: white;
+    }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="#">
         <img src="{{ url('img/Logo.jpg') }}" alt="Logo" class="me-2">
@@ -98,7 +131,7 @@
     </div>
   </main>
 
-  <footer class="bg-light text-center py-3">
+  <footer class="text-center py-3">
     <p class="mb-0">Copyright &copy; 2024 Stellar Memories. All Rights Reserved.</p>
   </footer>
 

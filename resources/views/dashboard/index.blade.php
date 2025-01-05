@@ -5,16 +5,13 @@
     <div class="container mt-4">
         <h1 class="mb-4 text-center">Galeri Foto</h1>
 
-        <!-- Tampilkan Info Pencarian Jika Ada -->
         @if(isset($query) && $query != '')
             <h4 class="text-center mb-4">Hasil pencarian untuk: <strong>"{{ $query }}"</strong></h4>
         @endif
 
-        <!-- Galeri Foto -->
         <div id="gallery">
             @forelse($fotoss as $foto)
                 <div class="gallery-item">
-                    <!-- Tambahkan link ke foto.show -->
                     <a href="{{ route('foto.show', $foto->id) }}">
                         <img src="{{ asset('photo/' . $foto->foto) }}" alt="{{ $foto->JudulFoto }}">
                     </a>
@@ -26,7 +23,6 @@
     </div>
 </div>
 
-<!-- Masonry Layout -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
