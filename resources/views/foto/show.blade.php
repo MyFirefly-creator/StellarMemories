@@ -82,13 +82,11 @@
                 </div>
             </div>
 
-            <!-- Tombol untuk memicu Modal Laporan dengan jarak tambahan -->
             <button type="button" class="btn btn-warning w-100 mt-3" data-bs-toggle="modal" data-bs-target="#warningModal">
                 <span class="material-symbols-outlined">warning</span>
                 Laporkan Foto
             </button>
 
-            <!-- Modal Laporan -->
             <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
