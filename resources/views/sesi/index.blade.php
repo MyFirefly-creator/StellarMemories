@@ -36,7 +36,7 @@
     }
 
     .navbar-brand {
-      color: white; 
+      color: white;
     }
 
     .navbar-brand img {
@@ -86,6 +86,9 @@
           </li>
           <li class="nav-item">
             <a class="btn btn-light" href="{{ route('sesi.register') }}">Daftar</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="{{ route('index') }}">Dashboard</a>
           </li>
         </ul>
       </div>
