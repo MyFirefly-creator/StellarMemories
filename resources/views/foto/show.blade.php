@@ -24,19 +24,26 @@
 
                     <form action="{{ route('foto.like', $foto->id) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-sm {{ $foto->isLikedBy(Auth::id()) ? 'btn-danger' : 'btn-outline-primary' }}">
-                            <span class="material-symbols-outlined">
-                                {{ $foto->isLikedBy(Auth::id()) ? 'favorite' : 'favorite_border' }}
-                            </span>
-                            {{ $foto->likeFotos()->count() }} Like
-                        </button>
+                        @if(Auth::check())
+                            <button type="submit" class="btn btn-sm {{ $foto->isLikedBy(Auth::id()) ? 'btn-danger' : 'btn-outline-primary' }}">
+                                <span class="material-symbols-outlined">
+                                    {{ $foto->isLikedBy(Auth::id()) ? 'favorite' : 'favorite_border' }}
+                                </span>
+                                {{ $foto->likeFotos()->count() }} Like
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-sm btn-outline-primary" disabled>
+                                <span class="material-symbols-outlined">favorite_border</span> Like
+                            </button>
+                        @endif
                         <a href="{{ route('foto.download', $foto->id) }}" class="btn btn-primary">
-                            <span class="material-symbols-outlined">download</span></span> Download Foto
+                            <span class="material-symbols-outlined">download</span> Download Foto
                         </a>
                     </form>
                 </div>
             </div>
 
+            @auth
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-light">
                     <h5 class="mb-0 text-secondary">Tambah Komentar</h5>
@@ -55,6 +62,7 @@
                     </form>
                 </div>
             </div>
+            @endauth
 
             <div class="card shadow-sm">
                 <div class="card-header bg-light">
@@ -82,10 +90,12 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-warning w-100 mt-3" data-bs-toggle="modal" data-bs-target="#warningModal">
-                <span class="material-symbols-outlined">warning</span>
-                Laporkan Foto
-            </button>
+            @auth
+                <button type="button" class="btn btn-warning w-100 mt-3" data-bs-toggle="modal" data-bs-target="#warningModal">
+                    <span class="material-symbols-outlined">warning</span>
+                    Laporkan Foto
+                </button>
+            @endauth
 
             <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

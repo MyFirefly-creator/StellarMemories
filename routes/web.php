@@ -16,6 +16,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/404', function () {
+    return view('errors.404');
+})->name('custom.404');
+
 Route::prefix('sesi')->name('sesi.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register');
@@ -41,14 +45,28 @@ Route::prefix('album')->middleware('auth')->group(function () {
     Route::delete('/{id}', [GaleriController::class, 'destroy'])->name('album.destroy');
 });
 
-Route::resource('foto', FotoController::class);
+Route::middleware('auth')->group(function () {
+    Route::get('foto', [FotoController::class, 'index'])->name('foto.index');
+    Route::get('foto/create', [FotoController::class, 'create'])->name('foto.create');
+    Route::post('foto', [FotoController::class, 'store'])->name('foto.store');
+    Route::get('foto/{id}/edit', [FotoController::class, 'edit'])->name('foto.edit');
+    Route::put('foto/{id}', [FotoController::class, 'update'])->name('foto.update');
+    Route::delete('foto/{id}', [FotoController::class, 'destroy'])->name('foto.destroy');
+    Route::get('foto/{id}/download', [FotoController::class, 'download'])->name('foto.download');
+});
 
-Route::get('/foto/{id}', [KomentarController::class, 'index'])->name('foto.show');
-Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.store');
+Route::get('foto/{id}', [FotoController::class, 'show'])->name('foto.show');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.store');
+    Route::post('/warning', [WarningController::class, 'store'])->name('warning.store');
+});
 
 Route::post('/like/{fotoId}', [LikeFotoController::class, 'toggleLike'])->name('foto.like');
+Route::get('/foto/{id}', [KomentarController::class, 'index'])->name('foto.show');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('user/edit/{id}', [AdminController::class, 'editUser'])->name('user.edit');
     Route::put('user/update/{id}', [AdminController::class, 'updateUser'])->name('user.update');
@@ -56,7 +74,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('foto/delete/{id}', [AdminController::class, 'destroyFoto'])->name('foto.destroy');
 });
 
-Route::post('/warning', [WarningController::class, 'store'])->name('warning.store');
+
 
 Route::get('/foto/download/{id}', [FotoController::class, 'download'])->name('foto.download');
 
