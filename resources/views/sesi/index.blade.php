@@ -85,7 +85,7 @@
             <a class="btn btn-danger me-2" href="{{ route('sesi.login') }}">Masuk</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-light" href="{{ route('sesi.register') }}">Daftar</a>
+            <a class="btn btn-light me-2" href="{{ route('sesi.register') }}">Daftar</a>
           </li>
           <li class="nav-item">
             <a class="btn btn-primary" href="{{ route('index') }}">Dashboard</a>

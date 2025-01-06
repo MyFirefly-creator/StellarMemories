@@ -43,6 +43,13 @@
             <small>Foto sebelumnya: {{ $user->image }}</small>
         </div>
 
+        @if(Auth::user() && Auth::user()->role === 'admin')
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <input type="text" name="role" id="role" value="{{ old('role', $user->role) }}" class="form-control" required>
+            </div>
+        @endif
+
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>
