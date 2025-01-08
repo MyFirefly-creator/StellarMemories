@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(LikeFoto::class, 'UserID', 'id');
     }
+
+    public function warnings()
+    {
+        return $this->hasMany(Warning::class, 'UserID');
+    }
+
+    public function banned()
+    {
+       return $this->hasOne(Ban::class, 'UserID')->where('Ban_Until', '>', now());
+    }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\LikeFotoController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\WarningController;
+use App\Http\Controllers\BanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,14 +30,16 @@ Route::prefix('sesi')->name('sesi.')->group(function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/edit', [UserController::class, 'showEditForm'])->name('edit');
     Route::put('/edit', [UserController::class, 'update'])->name('update');
-    Route::get('/profil', [UserController::class, 'profil'])->name('profil.index');
     Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+Route::prefix('sesi')->name('sesi.')->middleware('checkBan')->group(function() {
+    Route::get('/profil', [UserController::class, 'profil'])->name('profil.index');
+});
 
-Route::prefix('album')->middleware('auth')->group(function () {
+
+Route::prefix('album')->middleware('checkBan','auth')->group(function () {
     Route::get('/', [GaleriController::class, 'index'])->name('album.index');
     Route::get('/create', [GaleriController::class, 'create'])->name('album.create');
     Route::post('/', [GaleriController::class, 'store'])->name('album.store');
@@ -45,7 +48,7 @@ Route::prefix('album')->middleware('auth')->group(function () {
     Route::delete('/{id}', [GaleriController::class, 'destroy'])->name('album.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('checkBan','auth')->group(function () {
     Route::get('foto', [FotoController::class, 'index'])->name('foto.index');
     Route::get('foto/create', [FotoController::class, 'create'])->name('foto.create');
     Route::post('foto', [FotoController::class, 'store'])->name('foto.store');
@@ -57,16 +60,23 @@ Route::middleware('auth')->group(function () {
 
 Route::get('foto/{id}', [FotoController::class, 'show'])->name('foto.show');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('checkBan','auth')->group(function () {
     Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.store');
     Route::post('/warning', [WarningController::class, 'store'])->name('warning.store');
 });
 
+Route::middleware('checkBan')->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+});
+
+Route::get('/ban', [BanController::class, 'index'])->name('banned.index');
+
 Route::post('/like/{fotoId}', [LikeFotoController::class, 'toggleLike'])->name('foto.like');
 Route::get('/foto/{id}', [KomentarController::class, 'index'])->name('foto.show');
+Route::post('/ban', [BanController::class, 'store'])->name('banned.store');
 
 
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('checkBan','auth')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('user/edit/{id}', [AdminController::class, 'editUser'])->name('user.edit');
     Route::put('user/update/{id}', [AdminController::class, 'updateUser'])->name('user.update');

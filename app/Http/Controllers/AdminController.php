@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Warning;
 use App\Models\Foto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -16,11 +16,12 @@ class AdminController extends Controller
             return redirect()->route('index')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }
 
-        $users = User::all();
-        $warnings = Warning::all();
+        $users = User::where('id', '!=', auth()->id())->paginate(5);
+        $warnings = Warning::paginate(5);
 
         return view('admin.index', compact('users', 'warnings'));
     }
+
 
     public function editUser($id)
     {
