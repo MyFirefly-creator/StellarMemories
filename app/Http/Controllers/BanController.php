@@ -10,7 +10,8 @@ class BanController extends Controller
 {
     public function index()
     {
-        return view('ban.index');
+        $ban = Ban::where('UserID', auth()->id())->latest()->first();
+        return view('ban.index', compact('ban'));
     }
     public function store(Request $request)
     {

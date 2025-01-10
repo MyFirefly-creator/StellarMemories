@@ -4,6 +4,8 @@
 <div class="banned-container">
     <h1>Your Account Has Been Banned</h1>
     <p>We are sorry, but your account has been banned. If you believe this is a mistake, please contact support.</p>
+    <p>Alasan Ban: {{ $ban->Deskripsi ?? 'Data alasan tidak tersedia.' }}</p>
+    <p>Ban Sampai : {{ $ban->Ban_Until ?? 'Data alasan tidak tersedia.' }}</p>
     <a href="{{ route('sesi.index') }}" class="btn">Go Back to Home</a>
 </div>
 @endsection
