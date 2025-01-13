@@ -90,9 +90,11 @@ class UserController extends Controller
         return view('sesi.edit', compact('user'));
     }
 
+
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+
         if (!$user) {
             return redirect()->route('sesi.profil.index')->with('error', 'Pengguna tidak ditemukan.');
         }
@@ -104,6 +106,7 @@ class UserController extends Controller
             'NamaLengkap' => 'required|string|max:255',
             'Alamat' => 'required|string|max:255',
             'image' => 'nullable|mimes:png,jpg,jpeg',
+            'role' => 'nullable|in:admin,user',
         ]);
 
         if ($request->hasFile('image')) {
@@ -128,6 +131,10 @@ class UserController extends Controller
         $user->NamaLengkap = $validated['NamaLengkap'];
         $user->Alamat = $validated['Alamat'];
 
+        if (Auth::user()->role === 'admin' && isset($validated['role'])) {
+            $user->role = $validated['role'];
+        }
+
         if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }
@@ -136,6 +143,7 @@ class UserController extends Controller
 
         return redirect()->route('sesi.profil.index')->with('success', 'Berhasil memperbarui data pengguna.');
     }
+
 
     public function dashboard()
     {
